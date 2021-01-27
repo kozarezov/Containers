@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ITList.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ceccentr <ceccentr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:51 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/01/26 11:42:40 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/01/27 17:43:45 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ namespace ft
 
 		ConstITList &operator=(ITList<T> const &other)
 		{
-			if (this != &other)
+			if (*this != other)
 				this->ptr = other.getPtr();
 			return (*this);
 		};

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ceccentr <ceccentr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/01/27 13:19:52 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/01/27 17:51:11 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,7 +356,7 @@ namespace ft
 			node<T> *back_node;
 			node<T> *new_node;
 
-			back_node = this->_end->prev.getPtr();
+			back_node = this->_end->prev;
 			new_node = add_node(value);
 			new_node->next = this->_end;
 			this->_end->prev = new_node;
@@ -379,7 +379,7 @@ namespace ft
 			node<T> *back_node;
 			node<T> *temp;
 
-			back_node = this->_end->prev.getPtr();
+			back_node = this->_end->prev;
 			if (back_node != this->_end)
 			{
 				temp = back_node->prev;
@@ -422,35 +422,57 @@ namespace ft
 	/* Operations */
 		void merge( list& other )
 		{
-			iterator begin_other = other.begin();
-			iterator end_other = other.end();
-			iterator begin_this = this->begin();
-			iterator end_this = this->end();
+			iterator it_this = this->begin();
+			iterator it_other = other.begin();
+			iterator temp(it_other);
 
-			if (*this != other)
+			if (this == &other)
+				return ;
+			while (it_other != other.end())
 			{
-				
-			}
+				temp++;
+				while (it_this != this->end())
+				{
+					if (*it_other < *it_this)
+					{
+						this->splice(it_this, other, it_other);
+						break;
+					}
+					else
+						it_this++;
+				}
+				if (it_this == this->end())
+					this->splice(it_this, other, it_other);
+				it_other = temp;
+    		}
 		};
 
 		template <class Compare>
 		void merge( list& other, Compare comp )
 		{
-			iterator begin_other = other.begin();
-			iterator end_other = other.end();
-			iterator begin_this = this->begin();
-			iterator end_this = this->end();
+			iterator it_this = this->begin();
+			iterator it_other = other.begin();
+			iterator temp(it_other);
 
-			if (*this != other)
+			if (this == &other)
+				return ;
+			while (it_other != other.end())
 			{
-				while (begin_this != end_this && begin_other != end_other)
+				temp++;
+				while (it_this != this->end())
 				{
-					while (begin_this != end_this && !comp(*begin_other, *begin_this))
-						++begin_this;
-					++begin_other;
-					this->splice(begin_this, other, begin_other.ptr->prev);
+					if (comp(*it_other, *it_this))
+					{
+						this->splice(it_this, other, it_other);
+						break;
+					}
+					else
+						it_this++;
 				}
-			}
+				if (it_this == this->end())
+					this->splice(it_this, other, it_other);
+				it_other = temp;
+    		}
 		};
 
 		void splice( const_iterator pos, list& other )
