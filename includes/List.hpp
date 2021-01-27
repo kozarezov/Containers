@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/01/27 12:17:40 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/01/27 12:58:48 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,12 +313,42 @@ namespace ft
 
 		void push_front( const T& value )
 		{
-			/*  write */
+			node<T> *new_node;
+
+			new_node = this->add_node(value);
+			new_node->prev = this->_end;
+			if (this->_begin == this->_end)
+			{
+				new_node->next = this->_end;
+				this->_end->prev = new_node;
+			}
+			else
+				new_node->next = this->_begin;
+			this->_begin = new_node;
+			this->_end->next = this->_begin;
+			this->_size++;
 		};
 
 		void pop_front()
 		{
-			/*  write */
+			node<T> *temp;
+
+			if (this->_begin != this->_end)
+			{
+				temp = this->_begin->next;
+				this->delete_node(this->_begin);
+				this->_size--;
+				if (temp == this->_end)
+				{
+					this->_begin = this->_end;
+					this->_end->prev = this->_end;
+				}
+				else
+				{
+					this->_begin = temp;
+					this->_begin->prev = this->_end;
+				}
+			}
 		};
 
 		void push_back( const T& value )
@@ -370,12 +400,23 @@ namespace ft
 
 		void resize( size_type count, T value = T() )
 		{
-			/*  write */
+			if (this->_size != count)
+			{
+				while (this->_size != count)
+				{
+					if (this->_size < count)
+						this->push_back(value);
+					else
+						this->pop_back();
+				}
+			}
 		};
 
 		void swap( list& other )
 		{
-			/*  write */
+			list temp = *this;
+			*this = other;
+			other = temp;
 		};
 
 	/* Operations */
