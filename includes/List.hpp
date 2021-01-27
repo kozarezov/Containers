@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/01/25 23:20:50 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/01/27 09:30:01 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,28 +227,61 @@ namespace ft
 	/* Modifiers */
 		void clear()
 		{
-			/*  write */
+			while (this->_size)
+				this->pop_back();
 		};
 
 		iterator insert( iterator pos, const T& value )
 		{
-			/*  write */
+			node<T> *temp;
+			
+			temp = this->_node.allocate(1);
+			this->_node.construct(temp);
+			temp->data = this->_alloc.allocate(1);
+			this->_alloc.construct(temp->data, value);
+			temp->prev = pos.getPtr()->prev;
+			temp->next = pos.getPtr();
+			temp->prev->next = temp;
+			temp->next->prev = temp;
+			this->_size++;
+			return (iterator(temp));
 		};
 
 		void insert( iterator pos, size_type count, const T& value )
 		{
-			/*  write */
+			for (size_type i = 0; i < count; i++)
+			{
+				this->insert(pos, value);
+			}
+			
 		};
 
 		template< class InputIt >
 		void insert( iterator pos, InputIt first, InputIt last)
 		{
-			/*  write */
+			while (first != last)
+			{
+				this->insert(pos, *first);
+				++first;
+			}
 		};
 
 		iterator erase( iterator pos )
 		{
-			/*  write */
+			node<T> *temp;
+
+			temp = pos.getPtr();
+			if (temp == this->_end)
+				return (iterator(this->_end));
+			temp->prev->next = temp->next;
+			temp->next->prev = temp->prev;
+			pos++;
+			this->_alloc.destroy(temp->data);
+			this->_alloc.deallocate(temp->data, 1);
+			this->_node.destroy(temp);
+			this->_node.deallocate(temp, 1);
+			this->_size--;
+			return (pos);
 		};
 
 		iterator erase( iterator first, iterator last )
