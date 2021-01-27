@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/01/27 12:58:48 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/01/27 13:19:52 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -422,13 +422,35 @@ namespace ft
 	/* Operations */
 		void merge( list& other )
 		{
-			/*  write */
+			iterator begin_other = other.begin();
+			iterator end_other = other.end();
+			iterator begin_this = this->begin();
+			iterator end_this = this->end();
+
+			if (*this != other)
+			{
+				
+			}
 		};
 
 		template <class Compare>
 		void merge( list& other, Compare comp )
 		{
-			/*  write */
+			iterator begin_other = other.begin();
+			iterator end_other = other.end();
+			iterator begin_this = this->begin();
+			iterator end_this = this->end();
+
+			if (*this != other)
+			{
+				while (begin_this != end_this && begin_other != end_other)
+				{
+					while (begin_this != end_this && !comp(*begin_other, *begin_this))
+						++begin_this;
+					++begin_other;
+					this->splice(begin_this, other, begin_other.ptr->prev);
+				}
+			}
 		};
 
 		void splice( const_iterator pos, list& other )

@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 15:00:05 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/01/25 23:12:22 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/01/27 13:16:53 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,22 @@
 
 int     main(void)
 {
-    size_t len;
-    size_t len1;
-
-    ft::list<int> a;
+    std::list<int> a;
     std::list<int> b;
 
-    len = a.max_size();
-    std::cout << len << std::endl;
+    b.push_back(1);
+    b.push_back(2);
+    b.push_back(3);
+    a.push_back(3);
+    a.push_back(1);
+    a.push_back(2);
 
-    len1 = b.max_size();
-    std::cout << len1 << std::endl;
+
+    b.merge(b);
+    for (std::list<int>::iterator i = b.begin(); i != b.end(); i++)
+    {
+        std::cout << *i << std::endl;
+    }
 
     return (0);
 }
