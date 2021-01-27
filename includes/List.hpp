@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/01/27 09:30:01 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/01/27 12:17:40 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,26 @@ namespace ft
 		std::allocator< node<T> >	_node;
 
 	public:
+	/* My functions */
+		node<T> *add_node(const T& value)
+		{
+			node<T> *new_node;
+			
+			new_node = this->_node.allocate(1);
+			this->_node.construct(new_node);
+			new_node->data = this->_alloc.allocate(1);
+			this->_alloc.construct(new_node->data, value);
+			return (new_node);
+		};
+		
+		void	delete_node(node<T> *del_node)
+		{
+			this->_alloc.destroy(del_node->data);
+			this->_alloc.deallocate(del_node->data, 1);
+			this->_node.destroy(del_node);
+			this->_node.deallocate(del_node, 1);
+		};
+		
 	/* Member functions */
 		list()
 		{
@@ -145,7 +165,6 @@ namespace ft
 				++first;
 			}
 		};
-
 	/* Element access */
 		reference front() 
 		{
@@ -233,18 +252,19 @@ namespace ft
 
 		iterator insert( iterator pos, const T& value )
 		{
-			node<T> *temp;
+			node<T> *new_node;
 			
-			temp = this->_node.allocate(1);
-			this->_node.construct(temp);
-			temp->data = this->_alloc.allocate(1);
-			this->_alloc.construct(temp->data, value);
-			temp->prev = pos.getPtr()->prev;
-			temp->next = pos.getPtr();
-			temp->prev->next = temp;
-			temp->next->prev = temp;
+			new_node = this->add_node(value);
+			new_node->prev = pos.getPtr()->prev;
+			if (new_node->prev == this->_end)
+				this->_begin = new_node;
+			new_node->next = pos.getPtr();
+			if (new_node->next == this->_end)
+				this->_end->prev = new_node;
+			new_node->prev->next = new_node;
+			new_node->next->prev = new_node;
 			this->_size++;
-			return (iterator(temp));
+			return (iterator(new_node));
 		};
 
 		void insert( iterator pos, size_type count, const T& value )
@@ -253,7 +273,6 @@ namespace ft
 			{
 				this->insert(pos, value);
 			}
-			
 		};
 
 		template< class InputIt >
@@ -268,25 +287,28 @@ namespace ft
 
 		iterator erase( iterator pos )
 		{
-			node<T> *temp;
+			node<T> *del_node;
 
-			temp = pos.getPtr();
-			if (temp == this->_end)
+			del_node = pos.getPtr();
+			if (del_node == this->_end)
 				return (iterator(this->_end));
-			temp->prev->next = temp->next;
-			temp->next->prev = temp->prev;
+			del_node->prev->next = del_node->next;
+			del_node->next->prev = del_node->prev;
 			pos++;
-			this->_alloc.destroy(temp->data);
-			this->_alloc.deallocate(temp->data, 1);
-			this->_node.destroy(temp);
-			this->_node.deallocate(temp, 1);
+			this->delete_node(del_node);
 			this->_size--;
+			if (del_node->prev == this->_end)
+				this->_begin = del_node->next;
+			if (del_node->next == this->_end)
+				this->_back = del_node->prev;
 			return (pos);
 		};
 
 		iterator erase( iterator first, iterator last )
 		{
-			/*  write */
+			while (first != last)
+				first = this->erase(first);
+			return (first);
 		};
 
 		void push_front( const T& value )
@@ -301,12 +323,49 @@ namespace ft
 
 		void push_back( const T& value )
 		{
-			/*  write */
+			node<T> *back_node;
+			node<T> *new_node;
+
+			back_node = this->_end->prev.getPtr();
+			new_node = add_node(value);
+			new_node->next = this->_end;
+			this->_end->prev = new_node;
+			this->_size++;
+			if (back_node == this->_end)
+			{
+				this->_begin = new_node;
+				new_node->prev = this->_end;
+				this->_end->next = new_node;
+			}
+			else
+			{
+				back_node->next = new_node;
+				new_node->prev = back_node;
+			}
 		};
 
 		void pop_back()
 		{
-			/*  write */
+			node<T> *back_node;
+			node<T> *temp;
+
+			back_node = this->_end->prev.getPtr();
+			if (back_node != this->_end)
+			{
+				temp = back_node->prev;
+				this->delete_node(back_node);
+				this->_size--;
+				if (temp == this->_end)
+				{
+					this->_begin = this->_end;
+					this->_end->prev = this->_end;
+				}
+				else
+				{
+					temp->next = this->_end;
+					this->_end->prev = temp;
+				}
+			}
 		};
 
 		void resize( size_type count, T value = T() )
