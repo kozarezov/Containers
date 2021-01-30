@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/01/27 17:51:11 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/01/30 11:36:50 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,7 +300,7 @@ namespace ft
 			if (del_node->prev == this->_end)
 				this->_begin = del_node->next;
 			if (del_node->next == this->_end)
-				this->_back = del_node->prev;
+				this->_end->prev = del_node->prev;
 			return (pos);
 		};
 
@@ -475,30 +475,82 @@ namespace ft
     		}
 		};
 
-		void splice( const_iterator pos, list& other )
+		void splice( iterator pos, list& other )
 		{
-			/*  write */
+			this->splice(pos, other, other.begin(), other.end());
 		};
 
-		void splice( const_iterator pos, list& other, const_iterator it )
+		void splice( iterator pos, list& other, iterator it )
 		{
-			/*  write */
+			node<T> *it_node = it.getPtr();
+			node<T> *pos_node = pos.getPtr();
+			
+			if (it_node != other._end)
+			{
+				//save other list path
+				it_node->prev->next = it_node->next;
+				it_node->next->prev = it_node->prev;
+				other._begin = other._end->next;
+				other._size--;
+				// put it node
+				pos_node->prev->next = it_node;
+				it_node->prev = pos_node->prev;
+				pos_node->prev = it_node;
+				it_node->next = pos_node;
+				this->_begin = this->_end->next;
+				this->_size++;
+			}
 		};
 
-		void splice( const_iterator pos, list& other, const_iterator first, const_iterator last)
+		void splice( iterator pos, list& other, iterator first, iterator last)
 		{
-			/*  write */
+			node<T>		*first_node = first.getPtr();
+			node<T>		*last_node = last.getPtr();
+			node<T>		*pos_node = pos.getPtr();
+			size_type	count = 0;
+
+			for (iterator temp = first; temp != last; temp++)
+				count++;
+			if (first_node != other._end)
+			{
+				if (last_node == other._end)
+					last_node = last_node->prev;
+				//save other list path
+				first_node->prev->next = last_node->next;
+				last_node->next->prev = first_node->prev;
+				other._begin = other._end->next;
+				other._size -= count;
+				// put it node
+				pos_node->prev->next = first_node;
+				first_node->prev = pos_node->prev;
+				pos_node->prev = last_node;
+				last_node->next = pos_node;
+				this->_begin = this->_end->next;
+				this->_size += count;
+          	}
 		};
 
 		void remove( const T& value )
 		{
-			/*  write */
+			for (iterator it = this->begin(); it != this->end(); it++)
+			{
+				if (*it == value)
+					it = this->erase(it);
+				else
+					++it;
+			}
 		};
 
 		template< class UnaryPredicate >
 		void remove_if( UnaryPredicate p )
 		{
-			/*  write */
+			for (iterator it = this->begin(); it != this->end(); it++)
+			{
+				if (p(*it))
+					it = this->erase(it);
+				else
+					++it;
+			}
 		};
 
 		void reverse()
