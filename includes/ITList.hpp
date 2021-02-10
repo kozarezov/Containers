@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:51 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/01/30 09:08:53 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/10 13:49:22 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,104 +23,106 @@ struct node
 
 namespace ft
 {
-	template <typename T>
+	template <class T>
 	class ITList
 	{
 	private:
-		node<T> *ptr;
+		node<T>* ptr;
 	public:
-		ITList() : ptr(nullptr)
+		explicit ITList() : ptr(nullptr)
 		{
-		};
+		}
 
-		ITList(node<T> *ptr) : ptr(ptr)
+		explicit ITList(node<T> *ptr) : ptr(ptr)
 		{
-		};
+		}
 
 		~ITList()
 		{
-		};
+		}
 
 		ITList(ITList const &other)
 		{
 			*this = other;
-		};
+		}
 
-		ITList &operator=(ITList const &other)
+		ITList &operator=(const ITList &other)
 		{
 			if (this != &other)
 				this->ptr = other.ptr;
 			return (*this);
-		};
+		}
 
 		ITList &operator++()
 		{
 			this->ptr = this->ptr->next;
 			return (*this);
-		};
+		}
 
 		ITList &operator--()
 		{
 			this->ptr = this->ptr->prev;
 			return (*this);
-		};
+		}
 
 		ITList operator++(int)
 		{
 			ITList tmp = *this;
 			this->ptr = this->ptr->next;
 			return (tmp);
-		};
+		}
 
 		ITList operator--(int)
 		{
 			ITList tmp = *this;
 			this->ptr = this->ptr->prev;
 			return (tmp);
-		};
+		}
 
 		bool operator==(ITList const &other)
 		{
 			return (this->ptr == other.ptr);
-		};
+		}
 
 		bool operator!=(ITList const &other)
 		{
 			return (this->ptr != other.ptr);
-		};
+		}
 
 		T &operator*()
 		{
 			return (*(this->ptr->data));
-		};
+		}
 
-		T const &operator*(int)
+		const T &operator*(int)
 		{
 			return (*(this->ptr->data));
-		};
+		}
 
 		T *operator->()
 		{
 			return (this->ptr->data);
-		};
+		}
 
 		node<T> *getPtr() const
 		{
 			return (this->ptr);
-		};
+		}
 	};
 
-	template <typename T>
+	template <class T>
 	class ConstITList
 	{
 	private:
+
 		node<T> *ptr;
+		
 	public:
-		ConstITList() : ptr(nullptr)
+		explicit ConstITList() : ptr(nullptr)
 		{
 		};
 
-		ConstITList(node<T> *ptr) : ptr(ptr)
+		explicit ConstITList(node<T> *ptr) : ptr(ptr)
 		{
 		};
 
@@ -128,24 +130,24 @@ namespace ft
 		{
 		};
 
-		ConstITList(ConstITList const &other)
+		ConstITList(const ConstITList &other)
 		{
 			*this = other;
 		};
 
-		ConstITList(ITList<T> const &other)
+		ConstITList(const ITList<T> &other)
 		{
 			*this = other;
 		};
 
-		ConstITList &operator=(ConstITList const &other)
+		ConstITList &operator=(const ConstITList &other)
 		{
 			if (this != &other)
 				this->ptr = other.ptr;
 			return (*this);
 		};
 
-		ConstITList &operator=(ITList<T> const &other)
+		ConstITList &operator=(const ITList<T> &other)
 		{
 			if (*this != other)
 				this->ptr = other.getPtr();
@@ -188,14 +190,9 @@ namespace ft
 			return (this->ptr != other.ptr);
 		};
 
-		T const &operator*(int)
+		const T &operator*()
 		{
 			return (*(this->ptr->data));
-		};
-
-		T *operator->() const
-		{
-			return (this->ptr->data);
 		};
 	};
 
@@ -205,11 +202,11 @@ namespace ft
 	private:
 		node<T> *ptr;
 	public:
-		ReverseITList() : ptr(nullptr)
+		explicit ReverseITList() : ptr(nullptr)
 		{
 		};
 
-		ReverseITList(node<T> *ptr) : ptr(ptr)
+		explicit ReverseITList(node<T> *ptr) : ptr(ptr)
 		{
 		};
 
@@ -292,11 +289,11 @@ namespace ft
 	private:
 		node<T> *ptr;
 	public:
-		ConstReverseITList() : ptr(nullptr)
+		explicit ConstReverseITList() : ptr(nullptr)
 		{
 		};
 
-		ConstReverseITList(node<T> *ptr) : ptr(ptr)
+		explicit ConstReverseITList(node<T> *ptr) : ptr(ptr)
 		{
 		};
 
@@ -364,7 +361,7 @@ namespace ft
 			return (this->ptr != other.ptr);
 		};
 
-		T const &operator*(int)
+		T const &operator*()
 		{
 			return (*(this->ptr->data));
 		};

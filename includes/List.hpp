@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/01/30 11:36:50 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/10 14:36:18 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ namespace ft
 		{
 			this->clear();
 			for (size_type i = 0; i < count; i++)
-				push_back(value);
+				this->push_back(value);
 		};
 
 		template< class InputIt >
@@ -161,7 +161,7 @@ namespace ft
 			this->clear();
 			while (first != last)
 			{
-				push_back(*first);
+				this->push_back(*first);
 				++first;
 			}
 		};
@@ -323,7 +323,10 @@ namespace ft
 				this->_end->prev = new_node;
 			}
 			else
+			{
+				this->_begin->prev = new_node;
 				new_node->next = this->_begin;
+			}
 			this->_begin = new_node;
 			this->_end->next = this->_begin;
 			this->_size++;
@@ -555,12 +558,30 @@ namespace ft
 
 		void reverse()
 		{
-			/*  write */
+			list temp;
+
+			for (iterator it = this->begin(); it != this->end(); it++)
+			{
+				temp.push_front(*it);
+			}
+			*this = temp;
 		};
 
 		void unique()
 		{
-			/*  write */
+			iterator beg = this->begin();
+			iterator end = this->end();
+			node<T> *temp;
+
+			++beg;
+			while (beg != end)
+			{
+				temp = beg.getPtr();
+				if (*beg == temp->data)
+					beg = this->erase(beg);
+				else
+					++beg;		
+			}
 		};
 
 		template< class BinaryPredicate >
