@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/10 14:36:18 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/11 13:00:11 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -490,12 +490,10 @@ namespace ft
 			
 			if (it_node != other._end)
 			{
-				//save other list path
 				it_node->prev->next = it_node->next;
 				it_node->next->prev = it_node->prev;
 				other._begin = other._end->next;
 				other._size--;
-				// put it node
 				pos_node->prev->next = it_node;
 				it_node->prev = pos_node->prev;
 				pos_node->prev = it_node;
@@ -518,12 +516,10 @@ namespace ft
 			{
 				if (last_node == other._end)
 					last_node = last_node->prev;
-				//save other list path
 				first_node->prev->next = last_node->next;
 				last_node->next->prev = first_node->prev;
 				other._begin = other._end->next;
 				other._size -= count;
-				// put it node
 				pos_node->prev->next = first_node;
 				first_node->prev = pos_node->prev;
 				pos_node->prev = last_node;
@@ -569,15 +565,15 @@ namespace ft
 
 		void unique()
 		{
-			iterator beg = this->begin();
-			iterator end = this->end();
-			node<T> *temp;
+			iterator	beg = this->begin();
+			iterator	end = this->end();
+			node<T>		*temp;
 
 			++beg;
 			while (beg != end)
 			{
-				temp = beg.getPtr();
-				if (*beg == temp->data)
+				temp = beg.getPtr()->prev;
+				if (*beg == *temp->data)
 					beg = this->erase(beg);
 				else
 					++beg;		
@@ -587,18 +583,58 @@ namespace ft
 		template< class BinaryPredicate >
 		void unique( BinaryPredicate p )
 		{
-			/*  write */
+			iterator	beg = this->begin();
+			iterator	end = this->end();
+			node<T>		*temp;
+
+			++beg;
+			while (beg != end)
+			{
+				temp = beg.getPtr()->prev;
+				if (p(*beg, *temp->data))
+					beg = this->erase(beg);
+				else
+					++beg;		
+			}
 		};
 
 		void sort()
 		{
-			/*  write */
+			iterator beg = this->begin();
+			iterator next = this->begin();
+			iterator end = this->end();
+
+			while (++next != end)
+			{
+				if (*next < *beg)
+				{
+					this->splice(beg, *this, next);
+					beg = this->begin();
+					next = this->begin();
+				}
+				else
+					beg = next;
+			}
 		};
 
 		template< class Compare >
 		void sort( Compare comp )
 		{
-			/*  write */
+			iterator beg = this->begin();
+			iterator next = this->begin();
+			iterator end = this->end();
+
+			while (++next != end)
+			{
+				if (comp(*next,*beg))
+				{
+					this->splice(beg, *this, next);
+					beg = this->begin();
+					next = this->begin();
+				}
+				else
+					beg = next;
+			}
 		};
 	};
 }
@@ -609,44 +645,79 @@ namespace ft
 	template< class T, class Alloc >
 	void swap( ft::list<T,Alloc>& lhs,ft::list<T,Alloc>& rhs )
 	{
-		/*  write */
+		lhs.swap(rhs);
 	};
 }
 
 template< class T, class Alloc >
 bool operator==( const ft::list<T,Alloc>& lhs,const ft::list<T,Alloc>& rhs )
 {
-	/*  write */
+	typename ft::list<T>::const_iterator beg_lhs = lhs.begin();
+    typename ft::list<T>::const_iterator beg_rhs = rhs.begin();
+	typename ft::list<T>::const_iterator end_lhs = lhs.end();
+    typename ft::list<T>::const_iterator end_rhs = rhs.end();
+	
+	if (lhs.size() != rhs.size())
+        return false;
+    while (beg_lhs != end_lhs)
+    {
+        if (*beg_lhs != *beg_rhs)
+            return false;
+		beg_lhs++;
+		beg_rhs++;
+    }
+    return true;
 };
 
 template< class T, class Alloc >
 bool operator!=( const ft::list<T,Alloc>& lhs,const ft::list<T,Alloc>& rhs )
 {
-	/*  write */
+	if (lhs == rhs)
+		return (false);
+	return(true);
 };
 
 template< class T, class Alloc >
 bool operator<( const ft::list<T,Alloc>& lhs,const ft::list<T,Alloc>& rhs )
 {
-	/*  write */
+	typename ft::list<T>::const_iterator beg_lhs = lhs.begin();
+    typename ft::list<T>::const_iterator beg_rhs = rhs.begin();
+	typename ft::list<T>::const_iterator end_lhs = lhs.end();
+    typename ft::list<T>::const_iterator end_rhs = rhs.end();
+
+	while (beg_lhs != end_lhs && beg_rhs != end_rhs)
+    {
+        if (*beg_lhs == *beg_rhs)
+        {
+            beg_lhs++;
+            beg_rhs++;
+        }
+        if (*beg_lhs < *beg_rhs)
+			return (true);
+		if (*beg_lhs > *beg_rhs)
+			return (false);
+    }
+    if (beg_lhs != end_lhs && beg_rhs != end_rhs)
+        return true;
+    return false;
 };
 
 template< class T, class Alloc >
 bool operator<=( const ft::list<T,Alloc>& lhs,const ft::list<T,Alloc>& rhs )
 {
-	/*  write */
+	return (!(rhs < lhs));
 };
 
 template< class T, class Alloc >
 bool operator>( const ft::list<T,Alloc>& lhs,const ft::list<T,Alloc>& rhs )
 {
-	/*  write */
+	return (rhs < lhs);
 };
 
 template< class T, class Alloc >
 bool operator>=( const ft::list<T,Alloc>& lhs,const ft::list<T,Alloc>& rhs )
 {
-	/*  write */
+	return (!(lhs < rhs));
 };
 
 #endif
