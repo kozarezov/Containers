@@ -6,17 +6,17 @@
 #    By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/23 14:41:04 by ceccentr          #+#    #+#              #
-#    Updated: 2021/01/30 11:39:15 by ceccentr         ###   ########.fr        #
+#    Updated: 2021/02/11 16:07:02 by ceccentr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = containers
 
-SRCS_NAME = main.cpp test_list.cpp test_map.cpp test_vector.cpp test_stack.cpp test_queue.cpp
+SRCS_NAME = main.cpp test_list.cpp test_map.cpp test_vector.cpp test_stack.cpp test_queue.cpp list_test.cpp
 SRCS_DIR = ./srcs/
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_NAME))
 
-HEADER_NAME = List.hpp ITList.hpp Stack.hpp
+HEADER_NAME = List.hpp ITList.hpp Stack.hpp Test_header.hpp
 HEADER_DIR = ./includes/
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_NAME))
 

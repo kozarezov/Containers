@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/11 13:00:11 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/11 16:26:39 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,7 +276,7 @@ namespace ft
 		};
 
 		template< class InputIt >
-		void insert( iterator pos, InputIt first, InputIt last)
+		void insert( iterator pos, InputIt first, typename std::enable_if < std::is_class <InputIt>::value, InputIt>::type last)
 		{
 			while (first != last)
 			{

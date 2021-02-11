@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:51 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/10 13:49:22 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/11 16:38:34 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,15 +142,13 @@ namespace ft
 
 		ConstITList &operator=(const ConstITList &other)
 		{
-			if (this != &other)
-				this->ptr = other.ptr;
+			this->ptr = other.ptr;
 			return (*this);
 		};
 
 		ConstITList &operator=(const ITList<T> &other)
 		{
-			if (*this != other)
-				this->ptr = other.getPtr();
+			this->ptr = other.getPtr();
 			return (*this);
 		};
 
@@ -313,15 +311,13 @@ namespace ft
 
 		ConstReverseITList &operator=(ConstReverseITList const &other)
 		{
-			if (this != &other)
-				this->ptr = other.ptr;
+			this->ptr = other.ptr;
 			return (*this);
 		};
 
 		ConstReverseITList &operator=(ReverseITList<T> const &other)
 		{
-			if (this != &other)
-				this->ptr = other.getPtr();
+			this->ptr = other.getPtr();
 			return (*this);
 		};
 
