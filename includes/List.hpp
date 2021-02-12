@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/11 16:26:39 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/12 13:32:54 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -535,8 +535,6 @@ namespace ft
 			{
 				if (*it == value)
 					it = this->erase(it);
-				else
-					++it;
 			}
 		};
 
@@ -547,8 +545,6 @@ namespace ft
 			{
 				if (p(*it))
 					it = this->erase(it);
-				else
-					++it;
 			}
 		};
 
@@ -692,12 +688,10 @@ bool operator<( const ft::list<T,Alloc>& lhs,const ft::list<T,Alloc>& rhs )
             beg_lhs++;
             beg_rhs++;
         }
-        if (*beg_lhs < *beg_rhs)
-			return (true);
-		if (*beg_lhs > *beg_rhs)
-			return (false);
+        else
+            return (*beg_lhs < *beg_rhs);
     }
-    if (beg_lhs != end_lhs && beg_rhs != end_rhs)
+    if (beg_rhs != end_rhs)
         return true;
     return false;
 };
@@ -711,13 +705,17 @@ bool operator<=( const ft::list<T,Alloc>& lhs,const ft::list<T,Alloc>& rhs )
 template< class T, class Alloc >
 bool operator>( const ft::list<T,Alloc>& lhs,const ft::list<T,Alloc>& rhs )
 {
-	return (rhs < lhs);
+	if (lhs <= rhs)
+		return (false);
+	return (true);
 };
 
 template< class T, class Alloc >
 bool operator>=( const ft::list<T,Alloc>& lhs,const ft::list<T,Alloc>& rhs )
 {
-	return (!(lhs < rhs));
+	if (lhs < rhs)
+		return (false);
+	return (true);
 };
 
 #endif

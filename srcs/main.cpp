@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 15:00:05 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/11 16:27:02 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/12 12:08:40 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int     main(void)
 {
-    list_test();
-    std::getchar();
+    test_list();
+    //std::getchar();
     return (0);
 }

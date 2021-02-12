@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 13:58:15 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/11 16:26:56 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/12 16:24:24 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # include <iostream>
 # include <sstream>
+# include <cstdlib>
 # include <string>
 # include <iterator>
 # include <iomanip>
@@ -29,7 +30,5 @@
 
 int		main();
 void	test_list();
-int		list_test(void);
-
 
 #endif
