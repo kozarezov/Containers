@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 15:00:13 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/12 16:31:50 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/12 16:46:41 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,6 @@ bool	p(int nbr1, int nbr2)
 bool	comp(int nbr1, int nbr2)
 {
 	return (nbr1 > nbr2);
-}
-
-void	print_header()
-{
-	std::cout << YELLOW;
-	std::cout << "|-------------------------------------------------------------------------------------------------------------------------------|" << std::endl;
-	std::cout << "|        Тест        |           Оригинальный вывод           |           Ft_container вывод           |  Результат выполнения  |" << std::endl;
-	std::cout << "|-------------------------------------------------------------------------------------------------------------------------------|" << std::endl;
-	std::cout << DEFAULT;
-}
-
-void	print_header(std::string str)
-{
-	std::cout << YELLOW << "|" << DEFAULT << std::left;
-	std::cout << BLUE << "                                                        #" << std::setw(70) << str << YELLOW << "|" << std::endl;
-	std::cout << "|-------------------------------------------------------------------------------------------------------------------------------|" << std::endl;
-	std::cout << DEFAULT;
 }
 
 void	print_list(ft::list<int> &my, std::list<int> &orig, std::string test, int flag)
@@ -132,9 +115,7 @@ void	print_element(ft::list<int>::iterator my, std::list<int>::iterator orig, st
 
 void	test_list()
 {
-	print_header();
-
-	print_header("Construct");
+	print_header("Constructors");
 	
 	{
 		ft::list<int> a;
@@ -532,11 +513,11 @@ void	test_list()
 		print_list(a, b, "swap", 0);
 
 		print_element(a < c, b < d, "operator <", 0);
-		print_element(a <= c, b <= d, "operator <", 0);
+		print_element(a <= c, b <= d, "operator <=", 0);
 		print_element(a > c, b > d, "operator >", 0);
 		print_element(a >= c, b >= d, "operator >=", 0);
-		print_element(a == c, b == d, "operator >=", 0);
-		print_element(a != c, b != d, "operator >=", 0);
+		print_element(a == c, b == d, "operator ==", 0);
+		print_element(a != c, b != d, "operator !=", 0);
 	
 	}
 }
