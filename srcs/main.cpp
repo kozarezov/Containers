@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 15:00:05 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/13 14:43:45 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/13 15:14:24 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int     main(void)
 	int a;
 
 	while (1)
-	{
+	{ 
 		a = print_header();
 		if (a == 0)
 			break;
@@ -67,6 +67,12 @@ int     main(void)
 			test_list();
 		if (a == 2)
 			test_stack();
+		if (a == 3)
+			test_map();
+		if (a == 4)
+			test_queue();
+		if (a == 5)
+			test_vector();
 	}
 	return (0);
 }

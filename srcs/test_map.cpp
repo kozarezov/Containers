@@ -3,10 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   test_map.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ceccentr <ceccentr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 15:00:16 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/01/24 15:00:16 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/13 15:02:00 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/Test_header.hpp"
+
+void	test_map()
+{
+	
+}
