@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 15:00:13 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/12 16:46:41 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/13 12:09:48 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,33 +45,6 @@ void	print_list(ft::list<int> &my, std::list<int> &orig, std::string test, int f
 		fout_my << *it;
 	}
 	fout_my << " [" << my.size() << "]";
-	size_my = fout_my.str().length();
-	size_orig = fout_orig.str().length();
-	if (flag == 1)
-		result = YELLOW "UNDEFINED";
-	else
-		result = ((size_my == size_orig && fout_my.str() == fout_orig.str()) ? GREEN "OK" : RED "FAIL");
-	std::cout << YELLOW << "|" << DEFAULT;
-	std::cout << "  " << BLUE << std::setw(18) << std::left << test << YELLOW << "|" << DEFAULT;
-	std::cout << "  " << std::setw(38) << fout_orig.str() << YELLOW << "|" << DEFAULT;
-	std::cout << "  " << std::setw(38) << fout_my.str() << YELLOW << "|" << DEFAULT;
-	std::cout << "           " << std::setw(20) << result << YELLOW << "|" << std::endl;
-	std::cout << "|-------------------------------------------------------------------------------------------------------------------------------|" << std::endl;
-	std::cout << DEFAULT;
-}
-
-template <typename T>
-void	print_element(T my, T orig, std::string test, int flag)
-{
-	std::stringstream	fout_my;
-	std::stringstream	fout_orig;
-	int					size_my = 0;
-	int					size_orig = 0;
-	std::string			result;
-
-	fout_orig << orig;
-	fout_my << my;
-
 	size_my = fout_my.str().length();
 	size_orig = fout_orig.str().length();
 	if (flag == 1)

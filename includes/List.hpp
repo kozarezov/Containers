@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/12 13:32:54 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/13 11:46:51 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ namespace ft
 
 	public:
 	/* My functions */
+	
 		node<T> *add_node(const T& value)
 		{
 			node<T> *new_node;
@@ -68,6 +69,7 @@ namespace ft
 		};
 		
 	/* Member functions */
+
 		list()
 		{
 			this->_size = 0;
@@ -165,7 +167,9 @@ namespace ft
 				++first;
 			}
 		};
+
 	/* Element access */
+
 		reference front() 
 		{
 			return (*this->_begin->data);
@@ -187,6 +191,7 @@ namespace ft
 		};
 
 	/* Iterators */
+
 		iterator begin()
 		{
 			return (iterator(this->_begin));
@@ -423,6 +428,7 @@ namespace ft
 		};
 
 	/* Operations */
+	
 		void merge( list& other )
 		{
 			iterator it_this = this->begin();
@@ -636,6 +642,7 @@ namespace ft
 }
 
 	/* Non-member functions */
+	
 namespace ft 
 {
 	template< class T, class Alloc >
