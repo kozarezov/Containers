@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 13:58:15 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/13 15:14:27 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/13 15:37:26 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include "List.hpp"
 # include "Stack.hpp"
 # include "Queue.hpp"
+# include "Map.hpp"
+# include "Vector.hpp"
 
 # include <list>
 # include <iterator>

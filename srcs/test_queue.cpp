@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 15:00:18 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/13 15:19:22 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/13 15:29:54 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	print_queue(ft::queue<int> my, std::queue<int> orig, std::string test, int 
 	int					size_orig = 0;
 	std::string			result;
 
-	fout_orig << " [" << orig.size() << "]";
+	fout_orig << "[" << orig.size() << "] ";
 	while (orig.empty() == 0)
 	{
 		fout_orig << orig.front();
 		orig.pop();
 	}
-	fout_my << " [" << my.size() << "]";
+	fout_my << "[" << my.size() << "] ";
 	while (my.empty() == 0)
 	{
 		fout_my << my.front();

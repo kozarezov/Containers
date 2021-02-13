@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 15:00:20 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/13 14:41:30 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/13 15:30:07 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	print_stack(ft::stack<int> my, std::stack<int> orig, std::string test, int 
 	int					size_orig = 0;
 	std::string			result;
 
-	fout_orig << " [" << orig.size() << "]";
+	fout_orig << "[" << orig.size() << "] ";
 	while (orig.empty() == 0)
 	{
 		fout_orig << orig.top();
 		orig.pop();
 	}
-	fout_my << " [" << my.size() << "]";
+	fout_my << "[" << my.size() << "] ";
 	while (my.empty() == 0)
 	{
 		fout_my << my.top();
