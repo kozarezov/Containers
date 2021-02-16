@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/13 11:46:51 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/16 15:59:00 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,7 @@ namespace ft
 
 		size_type max_size() const
 		{
-			return (std::numeric_limits<size_type>::max() / sizeof(node<T>));
+			return (std::numeric_limits<size_type>::max() / sizeof(node<value_type>));
 		};
 
 	/* Modifiers */
