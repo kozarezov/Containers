@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 15:32:00 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/16 16:09:40 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/17 15:37:11 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,62 @@ namespace ft
 
 	/* Modifiers */
 
-		
+		void clear()
+		{
+			if (this->_size != 0)
+			{
+				this->_alloc.deallocate(this->_ptr, this->_capacity);
+				this->_ptr = nullptr;
+				this->_size = 0;
+				this->_capacity = 0;
+			}
+		};
+
+		iterator insert( iterator pos, const T& value )
+		{
+			
+			
+		};
+
+		void insert( iterator pos, size_type count, const T& value )
+		{
+			vector<T> temp(pos, this->end());
+			iterator begin = temp.begin();
+			iterator end = temp.end();
+
+			this->_size -= (this->end() - pos);
+			for (size_type i = 0; i < count; i++)
+				this->push_back(value);
+			while (begin != end)
+			{
+				this->push_back(*begin);
+				++begin;
+			}
+		};
+
+		template< class InputIt >
+		void insert( iterator pos, InputIt first, InputIt last)
+		{
+			
+		};
+
+		iterator erase( iterator pos )
+		{
+			
+		};
+
+		iterator erase( iterator first, iterator last )
+		{
+			
+		};
+
+		void push_back( const T& value )
+		{
+			if (this->_size >= this->_capacity)
+				this->reserve(this->_capacity + 1);
+			this->_ptr[this->_size] = value;
+			this->_size++;
+		};
 	};
 }
 

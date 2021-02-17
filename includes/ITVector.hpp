@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 15:35:14 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/15 13:45:22 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/17 15:21:55 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ namespace ft
 	private:
 		T *ptr;
 	public:
-		explicit ITVector() : ptr(nullptr)
+		ITVector() : ptr(nullptr)
 		{
 		};
 
-		explicit ITVector(T *ptr) : ptr(ptr)
+		ITVector(T *ptr) : ptr(ptr)
 		{
 		};
 
@@ -67,7 +67,7 @@ namespace ft
 			return (*this);
 		};
 
-		ITVector operator++(int) const
+		ITVector operator++(int)
 		{
 			ITVector tmp = *this;
 			
@@ -75,7 +75,7 @@ namespace ft
 			return (tmp);
 		};
 
-		ITVector operator--(int) const
+		ITVector operator--(int)
 		{
 			ITVector tmp = *this;
 
@@ -105,7 +105,7 @@ namespace ft
 
 		difference_type operator-(const ITVector &it) const
 		{
-			return (ITVector(this->ptr-it.ptr));
+			return (this->ptr - it.ptr);
 		};
 
 		ITVector &operator-=(difference_type n)
