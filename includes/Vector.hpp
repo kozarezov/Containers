@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 15:32:00 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/17 15:37:11 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/18 16:39:27 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "ITVector.hpp"
 
 /* https://en.cppreference.com/w/cpp/container/vector */
+/* Capacity - undefind в зависимости от версии компилятора
+https://ravesli.com/urok-106-emkost-vektora-std-vector-v-kachestve-steka/ */
 
 namespace ft
 {
@@ -270,8 +272,10 @@ namespace ft
 
 		iterator insert( iterator pos, const T& value )
 		{
+			size_type position = pos - this->begin();
 			
-			
+			insert(pos, 1, value);
+			return (iterator(this->_ptr + position));
 		};
 
 		void insert( iterator pos, size_type count, const T& value )
@@ -279,10 +283,14 @@ namespace ft
 			vector<T> temp(pos, this->end());
 			iterator begin = temp.begin();
 			iterator end = temp.end();
-
-			this->_size -= (this->end() - pos);
+			size_type len = temp.end() - temp.begin();
+			
+			for (size_type i = 0; i < len; i++)
+				this->pop_back();
+			
 			for (size_type i = 0; i < count; i++)
 				this->push_back(value);
+				
 			while (begin != end)
 			{
 				this->push_back(*begin);
@@ -293,17 +301,45 @@ namespace ft
 		template< class InputIt >
 		void insert( iterator pos, InputIt first, InputIt last)
 		{
+			vector<T> temp(pos, this->end());
+			iterator begin = temp.begin();
+			iterator end = temp.end();
+			size_type len = temp.end() - temp.begin();
 			
+			for (size_type i = 0; i < len; i++)
+				this->pop_back();
+			
+			while (first != last)
+			{
+				push_back(*first);
+				++first;
+			}
+			
+			while (begin != end)
+			{
+				this->push_back(*begin);
+				++begin;
+			}
 		};
 
 		iterator erase( iterator pos )
 		{
-			
+			return (this->erase(pos, pos + 1));
 		};
 
 		iterator erase( iterator first, iterator last )
 		{
-			
+			iterator temp = last;
+			iterator end = this->end();
+
+			while (last != end)
+			{
+				*first = *last;
+				++first;
+				++last;
+			}
+			this->_size -= last - first;
+			return (temp);
 		};
 
 		void push_back( const T& value )
@@ -312,6 +348,30 @@ namespace ft
 				this->reserve(this->_capacity + 1);
 			this->_ptr[this->_size] = value;
 			this->_size++;
+		};
+
+		void pop_back()
+		{
+			if (this->_size > 0)
+				this->_size--;
+		};
+
+		void resize( size_type count, T value = T() )
+		{
+			while (this->_size != count)
+			{
+				if (this->_size > count)
+					this->pop_back();
+				else
+					this->push_back(value);
+			}
+		};
+
+		void swap( vector& other )
+		{
+			vector<T> temp = *this;
+			*this = other;
+			other = temp;
 		};
 	};
 }

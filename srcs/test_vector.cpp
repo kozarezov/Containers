@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 15:00:22 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/17 15:17:08 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/18 15:18:11 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	print_vector(ft::vector<int> &my, std::vector<int> &orig, std::string test,
 		fout_orig << *it;
 	}
 	fout_orig << " [" << orig.size() << "]";
-	fout_orig << " [" << orig.capacity() << "]";
+	/* fout_orig << " [" << orig.capacity() << "]"; */
 	for (ft::vector<int>::iterator it1 = my.begin(); it1 != my.end(); it1++)
 	{
 		fout_my << *it1;
 	}
 	fout_my << " [" << my.size() << "]";
-	fout_my << " [" << my.capacity() << "]";
+	/* fout_my << " [" << my.capacity() << "]"; */
 	size_my = fout_my.str().length();
 	size_orig = fout_orig.str().length();
 	if (flag == 1)
@@ -55,9 +55,25 @@ void	test_vector()
 
 		a.push_back(1);
 		b.push_back(1);
+		a.push_back(2);
+		b.push_back(2);
 
 		a.insert(a.begin(), (size_t)(4), 3);
 		b.insert(b.begin(), 4, 3);
-		print_vector(a, b, "empty_list", 0);
+		print_vector(a, b, "insert_elements", 0);
+	}
+	{
+		ft::vector<int> a;
+		std::vector<int> b;
+
+		a.push_back(1);
+		b.push_back(1);
+		a.push_back(2);
+		b.push_back(2);
+		a.pop_back();
+		b.pop_back();
+
+
+		print_vector(a, b, "pop_back", 0);
 	}
 }
