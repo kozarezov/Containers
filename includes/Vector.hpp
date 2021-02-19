@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 15:32:00 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/18 16:39:27 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/19 10:58:20 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ namespace ft
 		allocator_type	_alloc;
 
 	public:
-	/* My functions */
-
-	/* ... */
 
 	/* Member functions */
 		vector() : _ptr(nullptr)
@@ -78,7 +75,11 @@ namespace ft
 					this->_ptr[i] = value;
 			}
 			else
-				this->vector(alloc);
+			{
+				this->_size = 0;
+				this->_capacity = 0;
+				this->_alloc = alloc;
+			}
 		};
 
 		template< class InputIt >
@@ -122,7 +123,7 @@ namespace ft
 		};
 
 		template< class InputIt >
-		void assign( InputIt first, InputIt last )
+		void assign( InputIt first, typename std::enable_if < std::is_class <InputIt>::value, InputIt>::type last )
 		{
 			this->clear();
 			while (first != last)
@@ -299,7 +300,7 @@ namespace ft
 		};
 
 		template< class InputIt >
-		void insert( iterator pos, InputIt first, InputIt last)
+		void insert( iterator pos, InputIt first, typename std::enable_if < std::is_class <InputIt>::value, InputIt>::type last)
 		{
 			vector<T> temp(pos, this->end());
 			iterator begin = temp.begin();
@@ -374,7 +375,91 @@ namespace ft
 			other = temp;
 		};
 	};
-}
+};
 
+
+	/* Non-member functions */
+
+namespace ft 
+{
+	template< class T, class Alloc >
+	void swap( ft::vector<T,Alloc>& lhs, ft::vector<T,Alloc>& rhs )
+	{
+		lhs.swap(rhs);	
+	};
+};
+
+template< class T, class Alloc >
+bool operator==( const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs )
+{
+	typename ft::vector<T>::const_iterator beg_lhs = lhs.begin();
+    typename ft::vector<T>::const_iterator beg_rhs = rhs.begin();
+	typename ft::vector<T>::const_iterator end_lhs = lhs.end();
+    typename ft::vector<T>::const_iterator end_rhs = rhs.end();
+	
+	if (lhs.size() != rhs.size())
+        return false;
+    while (beg_lhs != end_lhs)
+    {
+        if (*beg_lhs != *beg_rhs)
+            return false;
+		beg_lhs++;
+		beg_rhs++;
+    }
+    return true;
+};
+
+template< class T, class Alloc >
+bool operator!=( const ft::vector<T,Alloc>& lhs,const ft::vector<T,Alloc>& rhs )
+{
+	if (lhs == rhs)
+		return (false);
+	return(true);
+};
+
+template< class T, class Alloc >
+bool operator<( const ft::vector<T,Alloc>& lhs,const ft::vector<T,Alloc>& rhs )
+{
+	typename ft::vector<T>::const_iterator beg_lhs = lhs.begin();
+    typename ft::vector<T>::const_iterator beg_rhs = rhs.begin();
+	typename ft::vector<T>::const_iterator end_lhs = lhs.end();
+    typename ft::vector<T>::const_iterator end_rhs = rhs.end();
+
+	while (beg_lhs != end_lhs && beg_rhs != end_rhs)
+    {
+        if (*beg_lhs == *beg_rhs)
+        {
+            beg_lhs++;
+            beg_rhs++;
+        }
+        else
+            return (*beg_lhs < *beg_rhs);
+    }
+    if (beg_rhs != end_rhs)
+        return true;
+    return false;
+};
+
+template< class T, class Alloc >
+bool operator<=( const ft::vector<T,Alloc>& lhs,const ft::vector<T,Alloc>& rhs )
+{
+	return (!(rhs < lhs));
+};
+
+template< class T, class Alloc >
+bool operator>( const ft::vector<T,Alloc>& lhs,const ft::vector<T,Alloc>& rhs )
+{
+	if (lhs <= rhs)
+		return (false);
+	return (true);
+};
+
+template< class T, class Alloc >
+bool operator>=( const ft::vector<T,Alloc>& lhs,const ft::vector<T,Alloc>& rhs )
+{
+	if (lhs < rhs)
+		return (false);
+	return (true);
+};
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 15:35:14 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/17 15:21:55 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/19 11:00:52 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,17 @@ namespace ft
 			return (this->ptr != other.ptr);
 		};
 
-		ITVector operator+(difference_type n) const
+		ITVector operator+(difference_type n)
 		{
 			return (ITVector(this->ptr + n));
 		};
 
-		ITVector operator-(difference_type n) const
+		ITVector operator-(difference_type n)
 		{
 			return (ITVector(this->ptr - n));
 		};
 
-		difference_type operator-(const ITVector &it) const
+		difference_type operator-(const ITVector &it)
 		{
 			return (this->ptr - it.ptr);
 		};
@@ -120,7 +120,7 @@ namespace ft
 			return (*this);
 		};
 
-		T &operator[](difference_type n) const
+		T &operator[](difference_type n)
 		{
 			return (this->ptr[n]);
 		};
@@ -193,7 +193,7 @@ namespace ft
 			return (*this);
 		};
 
-		ConstITVector operator++(int) const
+		ConstITVector operator++(int)
 		{
 			ConstITVector tmp = *this;
 			
@@ -201,7 +201,7 @@ namespace ft
 			return (tmp);
 		};
 
-		ConstITVector operator--(int) const
+		ConstITVector operator--(int)
 		{
 			ConstITVector tmp = *this;
 
@@ -312,7 +312,7 @@ namespace ft
 			return (*this);
 		};
 
-		ReverseITVector operator++(int) const
+		ReverseITVector operator++(int)
 		{
 			ReverseITVector tmp = *this;
 			
@@ -320,7 +320,7 @@ namespace ft
 			return (tmp);
 		};
 
-		ReverseITVector operator--(int) const
+		ReverseITVector operator--(int)
 		{
 			ReverseITVector tmp = *this;
 
@@ -338,17 +338,17 @@ namespace ft
 			return (this->ptr != other.ptr);
 		};
 
-		ReverseITVector operator+(difference_type n) const
+		ReverseITVector operator+(difference_type n)
 		{
 			return (ReverseITVector(this->ptr - n));
 		};
 
-		ReverseITVector operator-(difference_type n) const
+		ReverseITVector operator-(difference_type n)
 		{
 			return (ITReverseITVectorVector(this->ptr + n));
 		};
 
-		difference_type operator-(const ReverseITVector &it) const
+		difference_type operator-(const ReverseITVector &it)
 		{
 			return (ReverseITVector(this->ptr - it.ptr));
 		};
@@ -365,7 +365,7 @@ namespace ft
 			return (*this);
 		};
 
-		T &operator[](difference_type n) const
+		T &operator[](difference_type n)
 		{
 			return (this->ptr[n]);
 		};
@@ -438,7 +438,7 @@ namespace ft
 			return (*this);
 		};
 
-		ConstReverseITVector operator++(int) const
+		ConstReverseITVector operator++(int)
 		{
 			ConstReverseITVector tmp = *this;
 			
@@ -446,7 +446,7 @@ namespace ft
 			return (tmp);
 		};
 
-		ConstReverseITVector operator--(int) const
+		ConstReverseITVector operator--(int)
 		{
 			ConstReverseITVector tmp = *this;
 
