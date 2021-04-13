@@ -6,7 +6,7 @@
 #    By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/23 14:41:04 by ceccentr          #+#    #+#              #
-#    Updated: 2021/02/13 15:36:45 by ceccentr         ###   ########.fr        #
+#    Updated: 2021/02/24 11:50:54 by ceccentr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS_NAME = main.cpp test_list.cpp test_map.cpp test_vector.cpp test_stack.cpp t
 SRCS_DIR = ./srcs/
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_NAME))
 
-HEADER_NAME = List.hpp ITList.hpp Stack.hpp Test_header.hpp Queue.hpp Vector.hpp Map.hpp ITVector.hpp ITMap.hpp
+HEADER_NAME = List.hpp ITList.hpp Stack.hpp Test_header.hpp Queue.hpp Vector.hpp Map.hpp ITVector.hpp ITMap.hpp Node.hpp
 HEADER_DIR = ./includes/
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_NAME))
 

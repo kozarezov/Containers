@@ -6,20 +6,14 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:51 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/11 16:38:34 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/24 11:58:33 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITLIST_HPP
 # define ITLIST_HPP
 
-template <typename T>
-struct node
-{
-	T *data;
-	struct node *next;
-	struct node *prev;
-};
+# include "Node.hpp"
 
 namespace ft
 {

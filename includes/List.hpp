@@ -6,7 +6,7 @@
 /*   By: ceccentr <ceccentr@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:59:58 by ceccentr          #+#    #+#             */
-/*   Updated: 2021/02/16 15:59:00 by ceccentr         ###   ########.fr       */
+/*   Updated: 2021/02/24 11:58:10 by ceccentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ namespace ft
 		size_type					_size;
 		allocator_type				_alloc;
 		std::allocator< node<T> >	_node;
-
-	public:
+		
 	/* My functions */
 	
 		node<T> *add_node(const T& value)
@@ -67,7 +66,8 @@ namespace ft
 			this->_node.destroy(del_node);
 			this->_node.deallocate(del_node, 1);
 		};
-		
+
+	public:		
 	/* Member functions */
 
 		list()
